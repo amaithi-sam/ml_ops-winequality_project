@@ -37,6 +37,22 @@
     },
     {
         "label": "read_params",
+        "importPath": "get_data",
+        "description": "get_data",
+        "isExtraImport": true,
+        "detail": "get_data",
+        "documentation": {}
+    },
+    {
+        "label": "get_data",
+        "importPath": "get_data",
+        "description": "get_data",
+        "isExtraImport": true,
+        "detail": "get_data",
+        "documentation": {}
+    },
+    {
+        "label": "read_params",
         "kind": 2,
         "importPath": "src.get_data",
         "description": "src.get_data",
@@ -51,6 +67,15 @@
         "description": "src.get_data",
         "peekOfCode": "def get_data(config_path):\n    config = read_params(config_path)\n    # print(config)\n    data_path = config[\"data_source\"][\"s3_source\"]\n    df = pd.read_csv(data_path, sep=',', encoding='utf-8')\n    # print(df.head())\n    return df\nif __name__ == \"__main__\":\n    args = argparse.ArgumentParser()\n    args.add_argument(\"--config\", default=\"params.yaml\")",
         "detail": "src.get_data",
+        "documentation": {}
+    },
+    {
+        "label": "load_and_save",
+        "kind": 2,
+        "importPath": "src.load_data",
+        "description": "src.load_data",
+        "peekOfCode": "def load_and_save(config_path):\n    config = read_params(config_path)\n    df = get_data(config_path)",
+        "detail": "src.load_data",
         "documentation": {}
     },
     {
