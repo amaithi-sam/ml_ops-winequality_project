@@ -9,6 +9,51 @@
         "documentation": {}
     },
     {
+        "label": "yaml",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "yaml",
+        "description": "yaml",
+        "detail": "yaml",
+        "documentation": {}
+    },
+    {
+        "label": "pandas",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pandas",
+        "description": "pandas",
+        "detail": "pandas",
+        "documentation": {}
+    },
+    {
+        "label": "argparse",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "argparse",
+        "description": "argparse",
+        "detail": "argparse",
+        "documentation": {}
+    },
+    {
+        "label": "read_params",
+        "kind": 2,
+        "importPath": "src.get_data",
+        "description": "src.get_data",
+        "peekOfCode": "def read_params(config_path):\n    with open(config_path) as yaml_file:\n        config = yaml.safe_load(yaml_file)\n    return config\ndef get_data(config_path):\n    config = read_params(config_path)\n    # print(config)\n    data_path = config[\"data_source\"][\"s3_source\"]\n    df = pd.read_csv(data_path, sep=',', encoding='utf-8')\n    # print(df.head())",
+        "detail": "src.get_data",
+        "documentation": {}
+    },
+    {
+        "label": "get_data",
+        "kind": 2,
+        "importPath": "src.get_data",
+        "description": "src.get_data",
+        "peekOfCode": "def get_data(config_path):\n    config = read_params(config_path)\n    # print(config)\n    data_path = config[\"data_source\"][\"s3_source\"]\n    df = pd.read_csv(data_path, sep=',', encoding='utf-8')\n    # print(df.head())\n    return df\nif __name__ == \"__main__\":\n    args = argparse.ArgumentParser()\n    args.add_argument(\"--config\", default=\"params.yaml\")",
+        "detail": "src.get_data",
+        "documentation": {}
+    },
+    {
         "label": "dirs",
         "kind": 5,
         "importPath": "template",
