@@ -1,0 +1,29 @@
+[
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "dirs",
+        "kind": 5,
+        "importPath": "template",
+        "description": "template",
+        "peekOfCode": "dirs = [\n    os.path.join(\"data\", \"raw\"),\n    os.path.join(\"data\",\"processed\"),\n    \"notebooks\",\n    \"saved_models\",\n    \"src\"\n]\nfor dir_ in dirs:\n    os.makedirs(dir_, exist_ok=True)\n    with open(os.path.join(dir_, \".gitkeep\"), \"w\") as f:",
+        "detail": "template",
+        "documentation": {}
+    },
+    {
+        "label": "file_",
+        "kind": 5,
+        "importPath": "template",
+        "description": "template",
+        "peekOfCode": "file_ = [\n    \"dvc.yaml\",\n    \"params.yaml\",\n    \".gitignore\",\n    os.path.join(\"src\",\"__init__.py\"),\n]\nfor file in file_:\n    with open(file, \"w\") as f:\n        pass",
+        "detail": "template",
+        "documentation": {}
+    }
+]
