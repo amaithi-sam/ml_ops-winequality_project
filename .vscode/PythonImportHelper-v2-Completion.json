@@ -74,7 +74,7 @@
         "kind": 2,
         "importPath": "src.load_data",
         "description": "src.load_data",
-        "peekOfCode": "def load_and_save(config_path):\n    config = read_params(config_path)\n    df = get_data(config_path)",
+        "peekOfCode": "def load_and_save(config_path):\n    config = read_params(config_path)\n    df = get_data(config_path)\n    new_cols = [col.replace(\" \", \"_\") for col in df.columns]\n    raw_data_path = config[\"load_data\"][\"raw_dataset_csv\"]\n    df.to_csv(raw_data_path, sep=\",\", index=False, header=new_cols)\nif __name__ == \"__main__\":\n    args = argparse.ArgumentParser() \n    args.add_argument(\"--config\", default=\"params.yaml\")\n    parsed_args = args.parse_args()",
         "detail": "src.load_data",
         "documentation": {}
     },
