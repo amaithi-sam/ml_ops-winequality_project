@@ -53,6 +53,22 @@
     },
     {
         "label": "read_params",
+        "importPath": "get_data",
+        "description": "get_data",
+        "isExtraImport": true,
+        "detail": "get_data",
+        "documentation": {}
+    },
+    {
+        "label": "train_test_split",
+        "importPath": "sklearn.model_selection",
+        "description": "sklearn.model_selection",
+        "isExtraImport": true,
+        "detail": "sklearn.model_selection",
+        "documentation": {}
+    },
+    {
+        "label": "read_params",
         "kind": 2,
         "importPath": "src.get_data",
         "description": "src.get_data",
@@ -76,6 +92,15 @@
         "description": "src.load_data",
         "peekOfCode": "def load_and_save(config_path):\n    config = read_params(config_path)\n    df = get_data(config_path)\n    new_cols = [col.replace(\" \", \"_\") for col in df.columns]\n    raw_data_path = config[\"load_data\"][\"raw_dataset_csv\"]\n    df.to_csv(raw_data_path, sep=\",\", index=False, header=new_cols)\nif __name__ == \"__main__\":\n    args = argparse.ArgumentParser() \n    args.add_argument(\"--config\", default=\"params.yaml\")\n    parsed_args = args.parse_args()",
         "detail": "src.load_data",
+        "documentation": {}
+    },
+    {
+        "label": "split_and_saved_data",
+        "kind": 2,
+        "importPath": "src.split_data",
+        "description": "src.split_data",
+        "peekOfCode": "def split_and_saved_data(config_path):\n    config = read_params(config_path=config_path) \n    test_data_path = config[\"split_data\"][\"test_path\"]\n    train_data_path = config[\"split_data\"][\"train_path\"]\n    raw_data_path = config[\"load_data\"][\"raw_dataset_csv\"]\n    split_ratio = config[\"split_data\"][\"test_size\"]\n    random_state = config[\"base\"][\"random_state\"]\n    df = pd.read_csv(raw_data_path, sep=',')\n    train, test = train_test_split(\n        df,",
+        "detail": "src.split_data",
         "documentation": {}
     },
     {
