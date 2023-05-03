@@ -60,11 +60,104 @@
         "documentation": {}
     },
     {
+        "label": "read_params",
+        "importPath": "get_data",
+        "description": "get_data",
+        "isExtraImport": true,
+        "detail": "get_data",
+        "documentation": {}
+    },
+    {
         "label": "train_test_split",
         "importPath": "sklearn.model_selection",
         "description": "sklearn.model_selection",
         "isExtraImport": true,
         "detail": "sklearn.model_selection",
+        "documentation": {}
+    },
+    {
+        "label": "train_test_split",
+        "importPath": "sklearn.model_selection",
+        "description": "sklearn.model_selection",
+        "isExtraImport": true,
+        "detail": "sklearn.model_selection",
+        "documentation": {}
+    },
+    {
+        "label": "warnings",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "warnings",
+        "description": "warnings",
+        "detail": "warnings",
+        "documentation": {}
+    },
+    {
+        "label": "sys",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sys",
+        "description": "sys",
+        "detail": "sys",
+        "documentation": {}
+    },
+    {
+        "label": "numpy",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "numpy",
+        "description": "numpy",
+        "detail": "numpy",
+        "documentation": {}
+    },
+    {
+        "label": "mean_squared_error",
+        "importPath": "sklearn.metrics",
+        "description": "sklearn.metrics",
+        "isExtraImport": true,
+        "detail": "sklearn.metrics",
+        "documentation": {}
+    },
+    {
+        "label": "mean_absolute_error",
+        "importPath": "sklearn.metrics",
+        "description": "sklearn.metrics",
+        "isExtraImport": true,
+        "detail": "sklearn.metrics",
+        "documentation": {}
+    },
+    {
+        "label": "r2_score",
+        "importPath": "sklearn.metrics",
+        "description": "sklearn.metrics",
+        "isExtraImport": true,
+        "detail": "sklearn.metrics",
+        "documentation": {}
+    },
+    {
+        "label": "ElasticNet",
+        "importPath": "sklearn.linear_model",
+        "description": "sklearn.linear_model",
+        "isExtraImport": true,
+        "detail": "sklearn.linear_model",
+        "documentation": {}
+    },
+    {
+        "label": "joblib",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "joblib",
+        "description": "joblib",
+        "detail": "joblib",
+        "documentation": {}
+    },
+    {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
         "documentation": {}
     },
     {
@@ -101,6 +194,24 @@
         "description": "src.split_data",
         "peekOfCode": "def split_and_saved_data(config_path):\n    config = read_params(config_path=config_path) \n    test_data_path = config[\"split_data\"][\"test_path\"]\n    train_data_path = config[\"split_data\"][\"train_path\"]\n    raw_data_path = config[\"load_data\"][\"raw_dataset_csv\"]\n    split_ratio = config[\"split_data\"][\"test_size\"]\n    random_state = config[\"base\"][\"random_state\"]\n    df = pd.read_csv(raw_data_path, sep=',')\n    train, test = train_test_split(\n        df,",
         "detail": "src.split_data",
+        "documentation": {}
+    },
+    {
+        "label": "eval_metrics",
+        "kind": 2,
+        "importPath": "src.train_and_evaluate",
+        "description": "src.train_and_evaluate",
+        "peekOfCode": "def eval_metrics(y_true, y_pred):\n    rmse = mean_squared_error(y_true, y_pred)\n    mae = mean_absolute_error(y_true, y_pred)\n    r2 = r2_score(y_true, y_pred)\n    return rmse, mae, r2\ndef train_and_evaluate(config_path):\n    config = read_params(config_path)\n    test_data_path = config[\"split_data\"][\"test_path\"]\n    train_data_path = config[\"split_data\"][\"train_path\"]\n    random_state =  config[\"base\"][\"random_state\"]",
+        "detail": "src.train_and_evaluate",
+        "documentation": {}
+    },
+    {
+        "label": "train_and_evaluate",
+        "kind": 2,
+        "importPath": "src.train_and_evaluate",
+        "description": "src.train_and_evaluate",
+        "peekOfCode": "def train_and_evaluate(config_path):\n    config = read_params(config_path)\n    test_data_path = config[\"split_data\"][\"test_path\"]\n    train_data_path = config[\"split_data\"][\"train_path\"]\n    random_state =  config[\"base\"][\"random_state\"]\n    model_dir = config[\"model_dir\"]\n    alpha = config[\"estimator\"][\"ElasticNet\"][\"params\"][\"alpha\"]\n    l1_ratio = config[\"estimator\"][\"ElasticNet\"][\"params\"][\"l1_ratio\"]\n    target = [config[\"base\"][\"target_col\"]]\n    train = pd.read_csv(train_data_path, sep=',', encoding=\"utf-8\")",
+        "detail": "src.train_and_evaluate",
         "documentation": {}
     },
     {
