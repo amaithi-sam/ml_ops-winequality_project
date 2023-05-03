@@ -72,7 +72,7 @@ def train_and_evaluate(config_path):
     with open(scores_file, "w") as f:
         scores = {
             "rmse": rmse,
-            "mar": mae,
+            "mae": mae,
             "r2": r2,
         }
         json.dump(scores, f, indent=4)
