@@ -215,6 +215,15 @@
         "documentation": {}
     },
     {
+        "label": "test_generic",
+        "kind": 2,
+        "importPath": "tests.test_config",
+        "description": "tests.test_config",
+        "peekOfCode": "def test_generic():\n    assert",
+        "detail": "tests.test_config",
+        "documentation": {}
+    },
+    {
         "label": "dirs",
         "kind": 5,
         "importPath": "template",
