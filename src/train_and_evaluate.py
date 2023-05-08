@@ -2,22 +2,23 @@
 
 # Train the Algo
 
-# Save the Metrics & Parameters 
+# Save the Metrics & Parameters
 
-import os 
-import pandas 
-import warnings 
-import sys 
-import pandas as pd 
+import os
+import pandas
+import warnings
+import sys
+import pandas as pd
 import numpy as np
-from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score 
-from sklearn.model_selection import train_test_split 
-from sklearn.linear_model import ElasticNet 
+from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import ElasticNet
 
-from get_data import read_params 
-import argparse 
-import joblib 
-import json 
+from get_data import read_params
+import argparse
+import joblib
+import json
+
 
 def eval_metrics(y_true, y_pred):
     rmse = mean_squared_error(y_true, y_pred)
@@ -31,7 +32,7 @@ def train_and_evaluate(config_path):
     config = read_params(config_path)
     test_data_path = config["split_data"]["test_path"]
     train_data_path = config["split_data"]["train_path"]
-    random_state =  config["base"]["random_state"]
+    random_state = config["base"]["random_state"]
     model_dir = config["model_dir"]
 
     alpha = config["estimator"]["ElasticNet"]["params"]["alpha"]
@@ -48,12 +49,12 @@ def train_and_evaluate(config_path):
     test_x = test.drop(target, axis=1)
 
     lr = ElasticNet(
-        alpha=alpha, 
-        l1_ratio=l1_ratio, 
+        alpha=alpha,
+        l1_ratio=l1_ratio,
         random_state=random_state
-        )
+    )
 
-    lr.fit(train_x, train_y) 
+    lr.fit(train_x, train_y)
 
     predicted_qualities = lr.predict(test_x)
 
@@ -64,9 +65,9 @@ def train_and_evaluate(config_path):
     print(" MAE: %s" % mae)
     print(" R2: %s" % r2)
 
-    #-------------------------------------------------
+    # -------------------------------------------------
 
-    scores_file = config["report"]["scores"] 
+    scores_file = config["report"]["scores"]
     params_file = config["report"]["params"]
 
     with open(scores_file, "w") as f:
@@ -84,14 +85,12 @@ def train_and_evaluate(config_path):
         }
         json.dump(params, f, indent=4)
 
-    #-------------------------------------------------
-
+    # -------------------------------------------------
 
     os.makedirs(model_dir, exist_ok=True)
     model_path = os.path.join(model_dir, "model.joblib")
-    
+
     joblib.dump(lr, model_path)
-    
 
 
 if __name__ == "__main__":
@@ -99,5 +98,3 @@ if __name__ == "__main__":
     args.add_argument("--config", default="params.yaml")
     parsed_args = args.parse_args()
     train_and_evaluate(parsed_args.config)
-
-
