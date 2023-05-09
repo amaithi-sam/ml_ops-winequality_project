@@ -1,8 +1,14 @@
+# local package install
+-e .
+
+# third party packages
 dvc
 dvc[gdrive]
-scikit-learn
-pandas 
-numpy
+sklearn
+pandas
 pytest
 tox
-Flask
+flake8
+flask
+gunicorn
+PyYAML
