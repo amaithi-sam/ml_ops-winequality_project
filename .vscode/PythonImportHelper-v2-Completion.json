@@ -8,6 +8,14 @@
         "documentation": {}
     },
     {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
         "label": "os",
         "kind": 6,
         "isExtraImport": true,
@@ -459,6 +467,15 @@
         "documentation": {}
     },
     {
+        "label": "pytest",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pytest",
+        "description": "pytest",
+        "detail": "pytest",
+        "documentation": {}
+    },
+    {
         "label": "setup",
         "importPath": "setuptools",
         "description": "setuptools",
@@ -472,6 +489,78 @@
         "description": "setuptools",
         "isExtraImport": true,
         "detail": "setuptools",
+        "documentation": {}
+    },
+    {
+        "label": "bin_dir",
+        "kind": 5,
+        "importPath": ".tox..pkg.bin.activate_this",
+        "description": ".tox..pkg.bin.activate_this",
+        "peekOfCode": "bin_dir = os.path.dirname(abs_file)\nbase = bin_dir[: -len(\"bin\") - 1]  # strip away the bin part from the __file__, plus the path separator\n# prepend bin to PATH (this file is inside the bin directory)\nos.environ[\"PATH\"] = os.pathsep.join([bin_dir] + os.environ.get(\"PATH\", \"\").split(os.pathsep))\nos.environ[\"VIRTUAL_ENV\"] = base  # virtual env is right above bin directory\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"../lib/python3.9/site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path.decode(\"utf-8\") if \"\" else path)",
+        "detail": ".tox..pkg.bin.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "base",
+        "kind": 5,
+        "importPath": ".tox..pkg.bin.activate_this",
+        "description": ".tox..pkg.bin.activate_this",
+        "peekOfCode": "base = bin_dir[: -len(\"bin\") - 1]  # strip away the bin part from the __file__, plus the path separator\n# prepend bin to PATH (this file is inside the bin directory)\nos.environ[\"PATH\"] = os.pathsep.join([bin_dir] + os.environ.get(\"PATH\", \"\").split(os.pathsep))\nos.environ[\"VIRTUAL_ENV\"] = base  # virtual env is right above bin directory\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"../lib/python3.9/site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path.decode(\"utf-8\") if \"\" else path)\nsys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]",
+        "detail": ".tox..pkg.bin.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "os.environ[\"PATH\"]",
+        "kind": 5,
+        "importPath": ".tox..pkg.bin.activate_this",
+        "description": ".tox..pkg.bin.activate_this",
+        "peekOfCode": "os.environ[\"PATH\"] = os.pathsep.join([bin_dir] + os.environ.get(\"PATH\", \"\").split(os.pathsep))\nos.environ[\"VIRTUAL_ENV\"] = base  # virtual env is right above bin directory\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"../lib/python3.9/site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path.decode(\"utf-8\") if \"\" else path)\nsys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix\nsys.prefix = base",
+        "detail": ".tox..pkg.bin.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "os.environ[\"VIRTUAL_ENV\"]",
+        "kind": 5,
+        "importPath": ".tox..pkg.bin.activate_this",
+        "description": ".tox..pkg.bin.activate_this",
+        "peekOfCode": "os.environ[\"VIRTUAL_ENV\"] = base  # virtual env is right above bin directory\n# add the virtual environments libraries to the host python import mechanism\nprev_length = len(sys.path)\nfor lib in \"../lib/python3.9/site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path.decode(\"utf-8\") if \"\" else path)\nsys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix\nsys.prefix = base",
+        "detail": ".tox..pkg.bin.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "prev_length",
+        "kind": 5,
+        "importPath": ".tox..pkg.bin.activate_this",
+        "description": ".tox..pkg.bin.activate_this",
+        "peekOfCode": "prev_length = len(sys.path)\nfor lib in \"../lib/python3.9/site-packages\".split(os.pathsep):\n    path = os.path.realpath(os.path.join(bin_dir, lib))\n    site.addsitedir(path.decode(\"utf-8\") if \"\" else path)\nsys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix\nsys.prefix = base",
+        "detail": ".tox..pkg.bin.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "sys.path[:]",
+        "kind": 5,
+        "importPath": ".tox..pkg.bin.activate_this",
+        "description": ".tox..pkg.bin.activate_this",
+        "peekOfCode": "sys.path[:] = sys.path[prev_length:] + sys.path[0:prev_length]\nsys.real_prefix = sys.prefix\nsys.prefix = base",
+        "detail": ".tox..pkg.bin.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "sys.real_prefix",
+        "kind": 5,
+        "importPath": ".tox..pkg.bin.activate_this",
+        "description": ".tox..pkg.bin.activate_this",
+        "peekOfCode": "sys.real_prefix = sys.prefix\nsys.prefix = base",
+        "detail": ".tox..pkg.bin.activate_this",
+        "documentation": {}
+    },
+    {
+        "label": "sys.prefix",
+        "kind": 5,
+        "importPath": ".tox..pkg.bin.activate_this",
+        "description": ".tox..pkg.bin.activate_this",
+        "peekOfCode": "sys.prefix = base",
+        "detail": ".tox..pkg.bin.activate_this",
         "documentation": {}
     },
     {
@@ -3854,7 +3943,7 @@
         "kind": 2,
         "importPath": "src.load_data",
         "description": "src.load_data",
-        "peekOfCode": "def load_and_save(config_path):\n    config = read_params(config_path)\n    df = get_data(config_path)\n    new_cols = [col.replace(\" \", \"_\") for col in df.columns]\n    raw_data_path = config[\"load_data\"][\"raw_dataset_csv\"]\n    df.to_csv(raw_data_path, sep=\",\", index=False, header=new_cols)\nif __name__ == \"__main__\":\n    args = argparse.ArgumentParser() \n    args.add_argument(\"--config\", default=\"params.yaml\")\n    parsed_args = args.parse_args()",
+        "peekOfCode": "def load_and_save(config_path):\n    config = read_params(config_path)\n    df = get_data(config_path)\n    new_cols = [col.replace(\" \", \"_\") for col in df.columns]\n    raw_data_path = config[\"load_data\"][\"raw_dataset_csv\"]\n    df.to_csv(raw_data_path, sep=\",\", index=False, header=new_cols)\nif __name__ == \"__main__\":\n    args = argparse.ArgumentParser()\n    args.add_argument(\"--config\", default=\"params.yaml\")\n    parsed_args = args.parse_args()",
         "detail": "src.load_data",
         "documentation": {}
     },
@@ -3863,7 +3952,7 @@
         "kind": 2,
         "importPath": "src.split_data",
         "description": "src.split_data",
-        "peekOfCode": "def split_and_saved_data(config_path):\n    config = read_params(config_path=config_path) \n    test_data_path = config[\"split_data\"][\"test_path\"]\n    train_data_path = config[\"split_data\"][\"train_path\"]\n    raw_data_path = config[\"load_data\"][\"raw_dataset_csv\"]\n    split_ratio = config[\"split_data\"][\"test_size\"]\n    random_state = config[\"base\"][\"random_state\"]\n    df = pd.read_csv(raw_data_path, sep=',')\n    train, test = train_test_split(\n        df,",
+        "peekOfCode": "def split_and_saved_data(config_path):\n    config = read_params(config_path=config_path)\n    test_data_path = config[\"split_data\"][\"test_path\"]\n    train_data_path = config[\"split_data\"][\"train_path\"]\n    raw_data_path = config[\"load_data\"][\"raw_dataset_csv\"]\n    split_ratio = config[\"split_data\"][\"test_size\"]\n    random_state = config[\"base\"][\"random_state\"]\n    df = pd.read_csv(raw_data_path, sep=',')\n    train, test = train_test_split(\n        df,",
         "detail": "src.split_data",
         "documentation": {}
     },
@@ -3872,7 +3961,7 @@
         "kind": 2,
         "importPath": "src.train_and_evaluate",
         "description": "src.train_and_evaluate",
-        "peekOfCode": "def eval_metrics(y_true, y_pred):\n    rmse = mean_squared_error(y_true, y_pred)\n    mae = mean_absolute_error(y_true, y_pred)\n    r2 = r2_score(y_true, y_pred)\n    return rmse, mae, r2\ndef train_and_evaluate(config_path):\n    config = read_params(config_path)\n    test_data_path = config[\"split_data\"][\"test_path\"]\n    train_data_path = config[\"split_data\"][\"train_path\"]\n    random_state =  config[\"base\"][\"random_state\"]",
+        "peekOfCode": "def eval_metrics(y_true, y_pred):\n    rmse = mean_squared_error(y_true, y_pred)\n    mae = mean_absolute_error(y_true, y_pred)\n    r2 = r2_score(y_true, y_pred)\n    return rmse, mae, r2\ndef train_and_evaluate(config_path):\n    config = read_params(config_path)\n    test_data_path = config[\"split_data\"][\"test_path\"]\n    train_data_path = config[\"split_data\"][\"train_path\"]\n    random_state = config[\"base\"][\"random_state\"]",
         "detail": "src.train_and_evaluate",
         "documentation": {}
     },
@@ -3881,8 +3970,17 @@
         "kind": 2,
         "importPath": "src.train_and_evaluate",
         "description": "src.train_and_evaluate",
-        "peekOfCode": "def train_and_evaluate(config_path):\n    config = read_params(config_path)\n    test_data_path = config[\"split_data\"][\"test_path\"]\n    train_data_path = config[\"split_data\"][\"train_path\"]\n    random_state =  config[\"base\"][\"random_state\"]\n    model_dir = config[\"model_dir\"]\n    alpha = config[\"estimator\"][\"ElasticNet\"][\"params\"][\"alpha\"]\n    l1_ratio = config[\"estimator\"][\"ElasticNet\"][\"params\"][\"l1_ratio\"]\n    target = [config[\"base\"][\"target_col\"]]\n    train = pd.read_csv(train_data_path, sep=',', encoding=\"utf-8\")",
+        "peekOfCode": "def train_and_evaluate(config_path):\n    config = read_params(config_path)\n    test_data_path = config[\"split_data\"][\"test_path\"]\n    train_data_path = config[\"split_data\"][\"train_path\"]\n    random_state = config[\"base\"][\"random_state\"]\n    model_dir = config[\"model_dir\"]\n    alpha = config[\"estimator\"][\"ElasticNet\"][\"params\"][\"alpha\"]\n    l1_ratio = config[\"estimator\"][\"ElasticNet\"][\"params\"][\"l1_ratio\"]\n    target = [config[\"base\"][\"target_col\"]]\n    train = pd.read_csv(train_data_path, sep=',', encoding=\"utf-8\")",
         "detail": "src.train_and_evaluate",
+        "documentation": {}
+    },
+    {
+        "label": "NotInRange",
+        "kind": 6,
+        "importPath": "tests.test_config",
+        "description": "tests.test_config",
+        "peekOfCode": "class NotInRange(Exception):\n    def __init__(self, message=\"Value Not in Range\"):\n        self.message = message \n        super().__init__(self.message)\ndef test_generic():\n    a = 5\n    with pytest.raises(NotInRange):\n        if a not in range(10, 20):\n            raise NotInRange",
+        "detail": "tests.test_config",
         "documentation": {}
     },
     {
@@ -3890,7 +3988,7 @@
         "kind": 2,
         "importPath": "tests.test_config",
         "description": "tests.test_config",
-        "peekOfCode": "def test_generic():\n    assert",
+        "peekOfCode": "def test_generic():\n    a = 5\n    with pytest.raises(NotInRange):\n        if a not in range(10, 20):\n            raise NotInRange",
         "detail": "tests.test_config",
         "documentation": {}
     },
