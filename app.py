@@ -42,15 +42,6 @@ def api_response(request):
         return error 
 
 
-
-
-
-
-
-
-
-
-
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
