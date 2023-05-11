@@ -351,12 +351,30 @@
         "documentation": {}
     },
     {
+        "label": "joblib",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "joblib",
+        "description": "joblib",
+        "detail": "joblib",
+        "documentation": {}
+    },
+    {
         "label": "yaml",
         "kind": 6,
         "isExtraImport": true,
         "importPath": "yaml",
         "description": "yaml",
         "detail": "yaml",
+        "documentation": {}
+    },
+    {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
         "documentation": {}
     },
     {
@@ -449,24 +467,6 @@
         "documentation": {}
     },
     {
-        "label": "joblib",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "joblib",
-        "description": "joblib",
-        "detail": "joblib",
-        "documentation": {}
-    },
-    {
-        "label": "json",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "json",
-        "description": "json",
-        "detail": "json",
-        "documentation": {}
-    },
-    {
         "label": "pytest",
         "kind": 6,
         "isExtraImport": true,
@@ -505,6 +505,14 @@
         "description": "flask",
         "isExtraImport": true,
         "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "prediction",
+        "importPath": "prediction_service",
+        "description": "prediction_service",
+        "isExtraImport": true,
+        "detail": "prediction_service",
         "documentation": {}
     },
     {
@@ -3953,6 +3961,96 @@
         "documentation": {}
     },
     {
+        "label": "NotInRange",
+        "kind": 6,
+        "importPath": "prediction_service.prediction",
+        "description": "prediction_service.prediction",
+        "peekOfCode": "class NotInRange(Exception):\n    def __init__(self, message=\"values entered are not in range\"):\n        self.message = message\n        super().__init__(self.message)\nclass NotInCols(Exception):\n    def __init__(self, message=\"Not in columns\"):\n        self.message = message\n        super().__init__(self.message)\n# ---------------------------------------------------------------\ndef read_params(config_path):",
+        "detail": "prediction_service.prediction",
+        "documentation": {}
+    },
+    {
+        "label": "NotInCols",
+        "kind": 6,
+        "importPath": "prediction_service.prediction",
+        "description": "prediction_service.prediction",
+        "peekOfCode": "class NotInCols(Exception):\n    def __init__(self, message=\"Not in columns\"):\n        self.message = message\n        super().__init__(self.message)\n# ---------------------------------------------------------------\ndef read_params(config_path):\n    with open(config_path) as yaml_file:\n        config = yaml.safe_load(yaml_file)\n    return config\ndef predict(data):",
+        "detail": "prediction_service.prediction",
+        "documentation": {}
+    },
+    {
+        "label": "read_params",
+        "kind": 2,
+        "importPath": "prediction_service.prediction",
+        "description": "prediction_service.prediction",
+        "peekOfCode": "def read_params(config_path):\n    with open(config_path) as yaml_file:\n        config = yaml.safe_load(yaml_file)\n    return config\ndef predict(data):\n    config = read_params(params_path)\n    model_dir_path = config[\"webapp_model_dir\"]\n    model = joblib.load(model_dir_path)\n    prediction = model.predict(data).tolist()[0]\n    # print(prediction[0])",
+        "detail": "prediction_service.prediction",
+        "documentation": {}
+    },
+    {
+        "label": "predict",
+        "kind": 2,
+        "importPath": "prediction_service.prediction",
+        "description": "prediction_service.prediction",
+        "peekOfCode": "def predict(data):\n    config = read_params(params_path)\n    model_dir_path = config[\"webapp_model_dir\"]\n    model = joblib.load(model_dir_path)\n    prediction = model.predict(data).tolist()[0]\n    # print(prediction[0])\n    try:\n        if 3 <= prediction <= 8:\n            return prediction\n        else:",
+        "detail": "prediction_service.prediction",
+        "documentation": {}
+    },
+    {
+        "label": "get_schema",
+        "kind": 2,
+        "importPath": "prediction_service.prediction",
+        "description": "prediction_service.prediction",
+        "peekOfCode": "def get_schema(schema_path=schema_path):\n    with open(schema_path) as json_file:\n        schema = json.load(json_file)\n    return schema\ndef validate_input(dict_request):\n    def _validate_cols(col):\n        schema = get_schema()\n        actual_col = schema.keys()\n        if col not in actual_col:\n            raise NotInCols",
+        "detail": "prediction_service.prediction",
+        "documentation": {}
+    },
+    {
+        "label": "validate_input",
+        "kind": 2,
+        "importPath": "prediction_service.prediction",
+        "description": "prediction_service.prediction",
+        "peekOfCode": "def validate_input(dict_request):\n    def _validate_cols(col):\n        schema = get_schema()\n        actual_col = schema.keys()\n        if col not in actual_col:\n            raise NotInCols\n    def _validate_values(col, val):\n        schema = get_schema()\n        if not (schema[col]['min'] <= float(dict_request[col]) <= schema[col]['max']):\n            raise NotInRange",
+        "detail": "prediction_service.prediction",
+        "documentation": {}
+    },
+    {
+        "label": "form_response",
+        "kind": 2,
+        "importPath": "prediction_service.prediction",
+        "description": "prediction_service.prediction",
+        "peekOfCode": "def form_response(dict_request):\n    if validate_input(dict_request):\n        data = dict_request.values()\n        data = [list(map(float, data))]\n        response = predict(data)\n        return response\ndef api_response(dict_request):\n    try:\n        if validate_input(dict_request):\n            data = np.array([list(dict_request.values())])",
+        "detail": "prediction_service.prediction",
+        "documentation": {}
+    },
+    {
+        "label": "api_response",
+        "kind": 2,
+        "importPath": "prediction_service.prediction",
+        "description": "prediction_service.prediction",
+        "peekOfCode": "def api_response(dict_request):\n    try:\n        if validate_input(dict_request):\n            data = np.array([list(dict_request.values())])\n            response = predict(data)\n            response = {\"response\": response}\n            return response\n    except Exception as e:\n        response = {\n            \"the_expected_range\": get_schema(),",
+        "detail": "prediction_service.prediction",
+        "documentation": {}
+    },
+    {
+        "label": "params_path",
+        "kind": 5,
+        "importPath": "prediction_service.prediction",
+        "description": "prediction_service.prediction",
+        "peekOfCode": "params_path = \"params.yaml\"\nschema_path = os.path.join(\"prediction_service\", \"schema_in.json\")\n# ---------------------------------------------------------------\nclass NotInRange(Exception):\n    def __init__(self, message=\"values entered are not in range\"):\n        self.message = message\n        super().__init__(self.message)\nclass NotInCols(Exception):\n    def __init__(self, message=\"Not in columns\"):\n        self.message = message",
+        "detail": "prediction_service.prediction",
+        "documentation": {}
+    },
+    {
+        "label": "schema_path",
+        "kind": 5,
+        "importPath": "prediction_service.prediction",
+        "description": "prediction_service.prediction",
+        "peekOfCode": "schema_path = os.path.join(\"prediction_service\", \"schema_in.json\")\n# ---------------------------------------------------------------\nclass NotInRange(Exception):\n    def __init__(self, message=\"values entered are not in range\"):\n        self.message = message\n        super().__init__(self.message)\nclass NotInCols(Exception):\n    def __init__(self, message=\"Not in columns\"):\n        self.message = message\n        super().__init__(self.message)",
+        "detail": "prediction_service.prediction",
+        "documentation": {}
+    },
+    {
         "label": "read_params",
         "kind": 2,
         "importPath": "src.get_data",
@@ -4025,47 +4123,11 @@
         "documentation": {}
     },
     {
-        "label": "read_params",
-        "kind": 2,
-        "importPath": "app",
-        "description": "app",
-        "peekOfCode": "def read_params(config_path):\n    with open(config_path) as yaml_file:\n        config = yaml.safe_load(yaml_file)\n    return config \ndef predict(data):\n    config = read_params(params_path)\n    model_dir_path =config[\"webapp_model_dir\"] \n    model = joblib.load(model_dir_path)\n    prediction = model.predict(data)\n    print(prediction[0])",
-        "detail": "app",
-        "documentation": {}
-    },
-    {
-        "label": "predict",
-        "kind": 2,
-        "importPath": "app",
-        "description": "app",
-        "peekOfCode": "def predict(data):\n    config = read_params(params_path)\n    model_dir_path =config[\"webapp_model_dir\"] \n    model = joblib.load(model_dir_path)\n    prediction = model.predict(data)\n    print(prediction[0])\n    return prediction[0]\ndef api_response(request):\n    try:\n        data = np.array([list(request.json.values())])",
-        "detail": "app",
-        "documentation": {}
-    },
-    {
-        "label": "api_response",
-        "kind": 2,
-        "importPath": "app",
-        "description": "app",
-        "peekOfCode": "def api_response(request):\n    try:\n        data = np.array([list(request.json.values())])\n        response = predict(data)\n        response = {\"response\": response}\n        return response\n    except Exception as e:\n        print(e)\n        error = {\"error\": \"Something went wrong try again\"}\n        return error ",
-        "detail": "app",
-        "documentation": {}
-    },
-    {
         "label": "index",
         "kind": 2,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "def index():\n    if request.method == \"POST\":\n        try:\n            if request.form:\n                data = dict(request.form).values()\n                data = [list(map(float, data))]\n                response = predict(data)\n                return render_template(\"index.html\", response=response)\n            elif request.json:\n                response = api_response(request)",
-        "detail": "app",
-        "documentation": {}
-    },
-    {
-        "label": "params_path",
-        "kind": 5,
-        "importPath": "app",
-        "description": "app",
-        "peekOfCode": "params_path = \"params.yaml\"\nwebapp_root = \"webapp\"\nstatic_dir = os.path.join(webapp_root, \"static\")\ntemplate_dir = os.path.join(webapp_root, \"templates\")\napp = Flask(__name__, static_folder=static_dir, template_folder=template_dir)\n#----------------------------------------------------------------------------------\ndef read_params(config_path):\n    with open(config_path) as yaml_file:\n        config = yaml.safe_load(yaml_file)\n    return config ",
+        "peekOfCode": "def index():\n    if request.method == \"POST\":\n        try:\n            if request.form:\n                data_req = dict(request.form)\n                response = prediction.form_response(data_req)\n                return render_template(\"index.html\", response=response)\n            elif request.json:\n                response = prediction.api_response(request.json)\n                return jsonify(response)",
         "detail": "app",
         "documentation": {}
     },
@@ -4074,7 +4136,7 @@
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "webapp_root = \"webapp\"\nstatic_dir = os.path.join(webapp_root, \"static\")\ntemplate_dir = os.path.join(webapp_root, \"templates\")\napp = Flask(__name__, static_folder=static_dir, template_folder=template_dir)\n#----------------------------------------------------------------------------------\ndef read_params(config_path):\n    with open(config_path) as yaml_file:\n        config = yaml.safe_load(yaml_file)\n    return config \ndef predict(data):",
+        "peekOfCode": "webapp_root = \"webapp\"\nstatic_dir = os.path.join(webapp_root, \"static\")\ntemplate_dir = os.path.join(webapp_root, \"templates\")\napp = Flask(__name__, static_folder=static_dir, template_folder=template_dir)\n# ----------------------------------------------------------------------------------\n@app.route(\"/\", methods=[\"GET\", \"POST\"])\ndef index():\n    if request.method == \"POST\":\n        try:\n            if request.form:",
         "detail": "app",
         "documentation": {}
     },
@@ -4083,7 +4145,7 @@
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "static_dir = os.path.join(webapp_root, \"static\")\ntemplate_dir = os.path.join(webapp_root, \"templates\")\napp = Flask(__name__, static_folder=static_dir, template_folder=template_dir)\n#----------------------------------------------------------------------------------\ndef read_params(config_path):\n    with open(config_path) as yaml_file:\n        config = yaml.safe_load(yaml_file)\n    return config \ndef predict(data):\n    config = read_params(params_path)",
+        "peekOfCode": "static_dir = os.path.join(webapp_root, \"static\")\ntemplate_dir = os.path.join(webapp_root, \"templates\")\napp = Flask(__name__, static_folder=static_dir, template_folder=template_dir)\n# ----------------------------------------------------------------------------------\n@app.route(\"/\", methods=[\"GET\", \"POST\"])\ndef index():\n    if request.method == \"POST\":\n        try:\n            if request.form:\n                data_req = dict(request.form)",
         "detail": "app",
         "documentation": {}
     },
@@ -4092,7 +4154,7 @@
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "template_dir = os.path.join(webapp_root, \"templates\")\napp = Flask(__name__, static_folder=static_dir, template_folder=template_dir)\n#----------------------------------------------------------------------------------\ndef read_params(config_path):\n    with open(config_path) as yaml_file:\n        config = yaml.safe_load(yaml_file)\n    return config \ndef predict(data):\n    config = read_params(params_path)\n    model_dir_path =config[\"webapp_model_dir\"] ",
+        "peekOfCode": "template_dir = os.path.join(webapp_root, \"templates\")\napp = Flask(__name__, static_folder=static_dir, template_folder=template_dir)\n# ----------------------------------------------------------------------------------\n@app.route(\"/\", methods=[\"GET\", \"POST\"])\ndef index():\n    if request.method == \"POST\":\n        try:\n            if request.form:\n                data_req = dict(request.form)\n                response = prediction.form_response(data_req)",
         "detail": "app",
         "documentation": {}
     },
@@ -4101,7 +4163,7 @@
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "app = Flask(__name__, static_folder=static_dir, template_folder=template_dir)\n#----------------------------------------------------------------------------------\ndef read_params(config_path):\n    with open(config_path) as yaml_file:\n        config = yaml.safe_load(yaml_file)\n    return config \ndef predict(data):\n    config = read_params(params_path)\n    model_dir_path =config[\"webapp_model_dir\"] \n    model = joblib.load(model_dir_path)",
+        "peekOfCode": "app = Flask(__name__, static_folder=static_dir, template_folder=template_dir)\n# ----------------------------------------------------------------------------------\n@app.route(\"/\", methods=[\"GET\", \"POST\"])\ndef index():\n    if request.method == \"POST\":\n        try:\n            if request.form:\n                data_req = dict(request.form)\n                response = prediction.form_response(data_req)\n                return render_template(\"index.html\", response=response)",
         "detail": "app",
         "documentation": {}
     },
