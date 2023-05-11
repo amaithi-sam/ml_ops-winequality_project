@@ -204,6 +204,14 @@
         "documentation": {}
     },
     {
+        "label": "api_response",
+        "importPath": "prediction_service.prediction",
+        "description": "prediction_service.prediction",
+        "isExtraImport": true,
+        "detail": "prediction_service.prediction",
+        "documentation": {}
+    },
+    {
         "label": "form_response",
         "importPath": "prediction_service.prediction",
         "description": "prediction_service.prediction",
@@ -212,7 +220,15 @@
         "documentation": {}
     },
     {
-        "label": "api_response",
+        "label": "NotInCols",
+        "importPath": "prediction_service.prediction",
+        "description": "prediction_service.prediction",
+        "isExtraImport": true,
+        "detail": "prediction_service.prediction",
+        "documentation": {}
+    },
+    {
+        "label": "NotInRange",
         "importPath": "prediction_service.prediction",
         "description": "prediction_service.prediction",
         "isExtraImport": true,
@@ -595,7 +611,7 @@
         "kind": 2,
         "importPath": "tests.test_config",
         "description": "tests.test_config",
-        "peekOfCode": "def test_form_response_correct_range(data=input_data[\"correct_range\"]):\n    res = form_response(data)\n    assert TARGET_range[\"min\"] <= res <= TARGET_range[\"max\"]\ndef test_api_response_correct_range(data=input_data[\"correct_range\"]):\n    res = api_response(data)\n    assert TARGET_range[\"min\"] <= res[\"response\"] <= TARGET_range[\"max\"]",
+        "peekOfCode": "def test_form_response_correct_range(data=input_data[\"correct_range\"]):\n    res = form_response(data)\n    assert TARGET_range[\"min\"] <= res <= TARGET_range[\"max\"]\ndef test_api_response_correct_range(data=input_data[\"correct_range\"]):\n    res = api_response(data)\n    assert TARGET_range[\"min\"] <= res[\"response\"] <= TARGET_range[\"max\"]\ndef test_form_response_incorrect_range(data=input_data[\"incorrect_range\"]):\n    with pytest.raises(prediction_service.prediction.NotInRange):\n        res =form_response(data)\ndef test_api_response_incorrect_range(data=input_data[\"incorrect_range\"]):",
         "detail": "tests.test_config",
         "documentation": {}
     },
@@ -604,7 +620,34 @@
         "kind": 2,
         "importPath": "tests.test_config",
         "description": "tests.test_config",
-        "peekOfCode": "def test_api_response_correct_range(data=input_data[\"correct_range\"]):\n    res = api_response(data)\n    assert TARGET_range[\"min\"] <= res[\"response\"] <= TARGET_range[\"max\"]",
+        "peekOfCode": "def test_api_response_correct_range(data=input_data[\"correct_range\"]):\n    res = api_response(data)\n    assert TARGET_range[\"min\"] <= res[\"response\"] <= TARGET_range[\"max\"]\ndef test_form_response_incorrect_range(data=input_data[\"incorrect_range\"]):\n    with pytest.raises(prediction_service.prediction.NotInRange):\n        res =form_response(data)\ndef test_api_response_incorrect_range(data=input_data[\"incorrect_range\"]):\n    res =api_response(data)\n    assert res[\"response\"] == prediction_service.prediction.NotInRange().message\ndef test_api_response_incorrect_column(data=input_data[\"incorrect_cols\"]):",
+        "detail": "tests.test_config",
+        "documentation": {}
+    },
+    {
+        "label": "test_form_response_incorrect_range",
+        "kind": 2,
+        "importPath": "tests.test_config",
+        "description": "tests.test_config",
+        "peekOfCode": "def test_form_response_incorrect_range(data=input_data[\"incorrect_range\"]):\n    with pytest.raises(prediction_service.prediction.NotInRange):\n        res =form_response(data)\ndef test_api_response_incorrect_range(data=input_data[\"incorrect_range\"]):\n    res =api_response(data)\n    assert res[\"response\"] == prediction_service.prediction.NotInRange().message\ndef test_api_response_incorrect_column(data=input_data[\"incorrect_cols\"]):\n    res =api_response(data)\n    assert res[\"response\"] == prediction_service.prediction.NotInCols().message",
+        "detail": "tests.test_config",
+        "documentation": {}
+    },
+    {
+        "label": "test_api_response_incorrect_range",
+        "kind": 2,
+        "importPath": "tests.test_config",
+        "description": "tests.test_config",
+        "peekOfCode": "def test_api_response_incorrect_range(data=input_data[\"incorrect_range\"]):\n    res =api_response(data)\n    assert res[\"response\"] == prediction_service.prediction.NotInRange().message\ndef test_api_response_incorrect_column(data=input_data[\"incorrect_cols\"]):\n    res =api_response(data)\n    assert res[\"response\"] == prediction_service.prediction.NotInCols().message",
+        "detail": "tests.test_config",
+        "documentation": {}
+    },
+    {
+        "label": "test_api_response_incorrect_column",
+        "kind": 2,
+        "importPath": "tests.test_config",
+        "description": "tests.test_config",
+        "peekOfCode": "def test_api_response_incorrect_column(data=input_data[\"incorrect_cols\"]):\n    res =api_response(data)\n    assert res[\"response\"] == prediction_service.prediction.NotInCols().message",
         "detail": "tests.test_config",
         "documentation": {}
     },

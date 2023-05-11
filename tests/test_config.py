@@ -3,8 +3,9 @@ import logging
 import os 
 import joblib 
 import json 
-from prediction_service.prediction import form_response, api_response 
-import prediction_service 
+from prediction_service.prediction import api_response, form_response, NotInCols, NotInRange
+import prediction_service
+
 
 input_data = {
     "incorrect_range": {
@@ -33,7 +34,7 @@ input_data = {
         "sulphates":1.25,
         "alcohol":10},
     
-    "incorrect_col": {
+    "incorrect_cols": {
         "fixed acidity": 10,
         "volatile acidity": 0.14,
         "citric acid":0.5,
@@ -61,3 +62,15 @@ def test_api_response_correct_range(data=input_data["correct_range"]):
     res = api_response(data)
     assert TARGET_range["min"] <= res["response"] <= TARGET_range["max"]
  
+def test_form_response_incorrect_range(data=input_data["incorrect_range"]):
+    with pytest.raises(prediction_service.prediction.NotInRange):
+        res =form_response(data)
+
+def test_api_response_incorrect_range(data=input_data["incorrect_range"]):
+    res =api_response(data)
+    assert res["response"] == prediction_service.prediction.NotInRange().message
+
+
+def test_api_response_incorrect_column(data=input_data["incorrect_cols"]):
+    res =api_response(data)
+    assert res["response"] == prediction_service.prediction.NotInCols().message
