@@ -3,10 +3,10 @@ name: winequality Python application
 on:
   push:
     branches:
-    - main
+    - main_mlflow
   pull_request:
     branches:
-    - main
+    - main_mlflow
 
 jobs:
   build:
